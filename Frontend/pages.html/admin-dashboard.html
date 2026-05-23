@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Dashboard - NY State Patrol</title>
+    <link rel="stylesheet" href="../admin-style.css" />
+  </head>
+  <body>
+    <nav class="admin-nav">
+      <a href="../index.html" class="admin-nav-left">NY State Patrol - Admin</a>
+      <div class="admin-nav-right">
+        <span id="admin-role"></span>
+        <button class="logout-btn" id="logout-btn">Logout</button>
+      </div>
+    </nav>
+
+    <div class="admin-wrap">
+
+      <div class="stats-row">
+        <div class="stat-card">
+          <h3 id="total-notices">-</h3>
+          <p>Total Notices</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="total-drivers">-</h3>
+          <p>Recent Notices Loaded</p>
+        </div>
+      </div>
+
+      <div class="admin-tabs">
+        <button class="tab-btn active" id="tab-notices">All Notices</button>
+        <button class="tab-btn" id="tab-create">Create Notice</button>
+        <button class="tab-btn" id="tab-search">Search Vehicle</button>
+        <button class="tab-btn" id="tab-update">Update Location</button>
+      </div>
+
+      <div id="panel-notices" class="tab-panel">
+        <h3 class="section-title">Recent Notices</h3>
+        <div id="loading-notices" class="loading-msg">Loading...</div>
+        <div id="notices-api-error" class="api-error" style="display: none;"></div>
+        
+        <div class="table-wrap">
+        <table class="notice-table" id="notices-table" style="display: none;">
+
+          <thead>
+            <tr>
+              <th>Notice #</th>
+              <th>Driver</th>
+              <th>Vehicle</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Officer</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="notices-body"></tbody>
+        </table>
+        </div>
+      </div>
+
+      <div id="panel-create" class="tab-panel" style="display: none;">
+        <h3 class="section-title">Create New Notice</h3>
+        <div id="create-success" class="success-msg" style="display: none;"></div>
+        <div id="create-error" class="api-error" style="display: none;"></div>
+
+        <div class="form-group">
+          <label for="c-vehicle-id">Vehicle ID</label>
+          <input type="number" id="c-vehicle-id" placeholder="Enter vehicle ID" />
+          <span class="error-msg" id="c-vehicle-id-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-officer-id">Officer ID</label>
+          <input type="number" id="c-officer-id" placeholder="Enter officer ID" />
+          <span class="error-msg" id="c-officer-id-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-date">Violation Date</label>
+          <input type="date" id="c-date" />
+          <span class="error-msg" id="c-date-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-time">Violation Time</label>
+          <input type="time" id="c-time" />
+          <span class="error-msg" id="c-time-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-district">District</label>
+          <input type="text" id="c-district" placeholder="e.g. District 1" />
+          <span class="error-msg" id="c-district-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-detachment">Detachment</label>
+          <input type="text" id="c-detachment" placeholder="e.g. Detachment A" />
+          <span class="error-msg" id="c-detachment-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-location">Location</label>
+          <input type="text" id="c-location" placeholder="e.g. Main St & 5th Ave" />
+          <span class="error-msg" id="c-location-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="c-description">Violation Description</label>
+          <input type="text" id="c-description" placeholder="e.g. Speeding 75mph in 55mph zone" />
+          <span class="error-msg" id="c-description-error"></span>
+        </div>
+
+        <button class="submit-btn" id="create-btn">Create Notice</button>
+      </div>
+
+      <div id="panel-search" class="tab-panel" style="display: none;">
+        <h3 class="section-title">Search Vehicle by Plate</h3>
+        <div id="search-api-error" class="api-error" style="display: none;"></div>
+
+        <div class="search-row">
+          <input type="text" id="search-plate" placeholder="Enter licence plate e.g. ABC1234" />
+          <button id="search-btn">Search</button>
+        </div>
+        <span class="error-msg" id="search-plate-error"></span>
+
+        <div id="search-result" style="display: none;">
+          <h4 class="section-title">Vehicle Info</h4>
+          <div class="info-box">
+            <p><span class="info-label">Make:</span> <span id="s-make"></span></p>
+            <p><span class="info-label">Year:</span> <span id="s-year"></span></p>
+            <p><span class="info-label">Colour:</span> <span id="s-colour"></span></p>
+            <p><span class="info-label">Plate:</span> <span id="s-plate"></span></p>
+            <p><span class="info-label">Owner:</span> <span id="s-owner"></span></p>
+            <p><span class="info-label">DL Number:</span> <span id="s-dl"></span></p>
+          </div>
+
+          <h4 class="section-title">Notices</h4>
+          <p id="s-notices-count"></p>
+          <div class="table-wrap">
+          <table class="notice-table" id="search-notices-table">
+            <thead>
+              <tr>
+                <th>Notice #</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody id="search-notices-body"></tbody>
+          </table>
+          </div>
+          <p id="s-no-notices" style="display: none;">No notices found for this vehicle.</p>
+        </div>
+      </div>
+
+      <div id="panel-update" class="tab-panel" style="display: none;">
+        <h3 class="section-title">Update Notice Location</h3>
+        <div id="update-success" class="success-msg" style="display: none;"></div>
+        <div id="update-error" class="api-error" style="display: none;"></div>
+
+        <div class="form-group">
+          <label for="u-notice-id">Notice ID</label>
+          <input type="number" id="u-notice-id" placeholder="Enter notice ID" />
+          <span class="error-msg" id="u-notice-id-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="u-location">New Location</label>
+          <input type="text" id="u-location" placeholder="Enter new location" />
+          <span class="error-msg" id="u-location-error"></span>
+        </div>
+
+        <button class="submit-btn" id="update-btn">Update Location</button>
+      </div>
+
+    </div>
+
+    <div id="confirm-overlay" class="confirm-overlay" style="display: none;">
+      <div class="confirm-box">
+        <p>Are you sure you want to delete this notice?</p>
+        <div class="confirm-buttons">
+          <button class="confirm-yes" id="confirm-yes">Yes, delete</button>
+          <button class="confirm-no" id="confirm-no">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts.js/admin-dash.js"></script>
+  </body>
+</html>

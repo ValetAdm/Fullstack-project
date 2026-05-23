@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+mysqlclient
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pydantic
+bcrypt==4.2.1
+passlib==1.7.4

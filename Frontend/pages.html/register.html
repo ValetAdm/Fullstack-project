@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - NY State Patrol</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav id="navbar">
+      <a href="../index.html" id="nav-logo">NY State Patrol</a>
+      <button class="hamburger" id="hamburger">☰</button>
+      <div id="nav-links">
+        <a href="../index.html">Home</a>
+        <a href="login.html">Driver Login</a>
+      </div>
+    </nav>
+
+    <div class="page-wrap">
+      <div class="form-box">
+        <h2>Create Account</h2>
+
+        <div id="register-error" class="api-error" style="display: none"></div>
+        <div
+          id="register-success"
+          class="success-msg"
+          style="display: none"
+        ></div>
+
+        <p class="section-label">Account Details</p>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter username" />
+          <span class="error-msg" id="username-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="Enter your email" />
+          <span class="error-msg" id="email-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Min 8 characters" />
+          <span class="error-msg" id="password-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            placeholder="Repeat your password"
+          />
+          <span class="error-msg" id="confirm-password-error"></span>
+        </div>
+
+        <p class="section-label">Personal Information</p>
+
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="Enter first name" />
+          <span class="error-msg" id="first-name-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Enter last name" />
+          <span class="error-msg" id="last-name-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="birth-date">Date of Birth</label>
+          <input type="date" id="birth-date" />
+          <span class="error-msg" id="birth-date-error"></span>
+        </div>
+
+        <p class="section-label">Driver's Licence</p>
+
+        <div class="form-group">
+          <label for="dl-number">Licence Number</label>
+          <input
+            type="text"
+            id="dl-number"
+            placeholder="Enter licence number"
+          />
+          <span class="error-msg" id="dl-number-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="licence-state">Licence State</label>
+          <input
+            type="text"
+            id="licence-state"
+            placeholder="e.g. NY"
+            maxlength="2"
+          />
+          <span class="error-msg" id="licence-state-error"></span>
+        </div>
+
+        <p class="section-label">Contact Information</p>
+
+        <div class="form-group">
+          <label for="address">Address</label>
+          <input type="text" id="address" placeholder="Enter your address" />
+          <span class="error-msg" id="address-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" placeholder="Enter your city" />
+          <span class="error-msg" id="city-error"></span>
+        </div>
+
+        <button class="submit-btn" id="register-btn">Create Account</button>
+
+        <div class="form-link">
+          <p>Already have an account? <a href="login.html">Login here</a></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../scripts.js/register.js"></script>
+    <script src="../scripts.js/nav.js"></script>
+  </body>
+</html>

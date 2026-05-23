@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Citations - NY State Patrol</title>
+    <link rel="stylesheet" href="../style.css" />
+  </head>
+  <body>
+    <nav class="nav-logged">
+      <a href="../index.html" class="nav-logged-left">NY State Patrol</a>
+      <button class="hamburger" id="hamburger">☰</button>
+      <div class="nav-logged-right" id="nav-menu">
+        <a href="dashboard.html">My Citations</a>
+        <a href="profile.html">My Profile</a>
+        <button class="logout-btn" id="logout-btn">Logout</button>
+      </div>
+    </nav>
+
+    <div id="dashboard-wrap">
+      <h2>My Citations</h2>
+      <p id="welcome-msg"></p>
+
+      <div id="search-section">
+        <div class="search-row">
+          <input
+            type="text"
+            id="plate-input"
+            placeholder="Enter your licence plate e.g. ABC1234"
+          />
+          <button id="search-btn">Search</button>
+        </div>
+        <span class="error-msg" id="plate-error"></span>
+      </div>
+
+      <div id="vehicle-info" style="display: none">
+        <h3 class="section-title">Vehicle Details</h3>
+        <div class="info-box">
+          <p><span class="info-label">Make:</span> <span id="v-make"></span></p>
+          <p><span class="info-label">Year:</span> <span id="v-year"></span></p>
+          <p>
+            <span class="info-label">Colour:</span> <span id="v-colour"></span>
+          </p>
+          <p>
+            <span class="info-label">Plate:</span> <span id="v-plate"></span>
+          </p>
+        </div>
+      </div>
+
+      <div id="notices-section" style="display: none">
+        <h3 class="section-title">Traffic Notices</h3>
+        <p id="notices-count"></p>
+        <div id="loading-notices" class="loading-msg" style="display: none">
+          Loading...
+        </div>
+        <div
+          id="api-error-notices"
+          class="api-error"
+          style="display: none"
+        ></div>
+        <table class="notice-table" id="notices-table">
+          <thead>
+            <tr>
+              <th>Notice #</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Description</th>
+              <th>Officer</th>
+              <th>Action Taken</th>
+            </tr>
+          </thead>
+          <tbody id="notices-body"></tbody>
+        </table>
+        <p id="no-notices-msg" style="display: none">
+          No notices found for this vehicle.
+        </p>
+      </div>
+    </div>
+
+    <script src="../scripts.js/dashboard.js"></script>
+  </body>
+</html>
